@@ -29,6 +29,8 @@ __author__ = "Mikko Ohtamaa <mikko@mfabrik.com>"
 __docformat__ = 'epytext'
 __copyright__ = "Copyright 2008-2010 mFabrik Research Oy"
 
+import time
+
 # Django imports
 from django import template
 from django.shortcuts import render_to_response
@@ -36,6 +38,10 @@ from django.template.loader import render_to_string
 from django.template import RequestContext
 from django import forms
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseServerError, HttpResponseRedirect
+
+# Django-nonrel
+
+from djangoappengine.utils import on_production_server 
 
 # Local imports
 from django.conf import settings
@@ -46,6 +52,7 @@ from facebook import FacebookError
 
 # Python logging package logger object for our server
 logger = logging.getLogger("Facebook helpers")
+
 
 def get_user(id):
     """ Return Facebook user object. """
@@ -94,9 +101,7 @@ def add_instance_outband_form(request):
     app_name = getattr(settings, 'FACEBOOK_APP_NAME', None)
     callback_path = getattr(settings, 'FACEBOOK_CALLBACK_PATH', None)
     internal = getattr(settings, 'FACEBOOK_INTERNAL', True)
-
-    
-    
+        
     request.facebook = Facebook(
         api_key=api_key,
         secret_key=secret_key,
@@ -279,15 +284,52 @@ def auth_complete(request, *args, **kwargs):
     # users.getLoggedInUser() requires a session key
     facebook.auth.getSession()
     
+
+def generate_latest_static_media_timestamp():
+    """ 
+    Query all files in static and get the latest timestamp. 
+    """
+    static_path = os.path.join(os.path.dirname(__file__), "..", "static")
+    
+    latest_time = 0
+    
+    files = os.listdir(static_path)
+    for f in files:
+        t = os.path.getmtime(os.path.join(static_path, f))
+        if t > latest_time:
+            latest_time = t
+            
+    return t 
+
+_latest_media_timestamp = None
+
+def get_static_media_suffix():
+    """
+    Since Facebook never expires static content, we
+    need to have a way to identify when static content has changed.
+    
+    We do this by suffixing all media URLs with a HTTP GET query parameter.
+    there.
+    """
+    
+    # Look up for the timestamp only on the server start
+    if not _latest_media_timestamp:
+        _latest_media_timestamp = generate_latest_static_media_timestamp()
+        
+    return _latest_media_timestamp
+
 def get_context_parameters():
     """
+    Fill in parameters for Fae
+    
     @return: Template context parameters for Facebook applications 
+    
     @rtype: dict
     """
     return {
         "fb_application_id" : settings.FACEBOOK_APPLICATION_ID,
         "fb_external_url" : settings.FACEBOOK_EXTERNAL_URL,
-        "fb_media_url" : settings.FACEBOOK_MEDIA_URL,
+        "fb_media_url_suffix" : get_static_media_suffix(),
         "fb_real_url" : settings.FACEBOOK_REAL_URL
     }
     

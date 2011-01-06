@@ -11,6 +11,7 @@ downloads/*
 eggs/*
 fake-eggs/*
 parts/*
+develop-eggs
 dist
 .installed.cfg
 .mr.developer.cfg
@@ -30,4 +31,21 @@ dist
 *.orig
 *.rej
 __minitage__*
+.metadata
+.secret.cfg
+
+.project
+.pydevproject
+flattened-eggs
+
+src/Django/
+src/collective.eclipsescripts/
+src/django-dbindexer/
+src/django-testapp/
+src/djangoappengine/
+src/djangotoolbox/
+src/djc.recipe/
+src/my.sampleproject/
+src/petbook/
+src/pyfacebook/
 
