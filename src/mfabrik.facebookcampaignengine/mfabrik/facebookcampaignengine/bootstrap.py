@@ -35,11 +35,11 @@ def main():
     We need this irritating hooky wooky because Google App Engine does not properly support
     Python packaging and expects a flat directory structure only. 
     """
-    
+
     logger.info("Starting with PYTHONPATH:" + str(sys.path))
-    
-    import django
-    
+
+    #enable_pdb()
+        
     from djangoappengine.main.main import main as djangoappengine_main
     djangoappengine_main()
     

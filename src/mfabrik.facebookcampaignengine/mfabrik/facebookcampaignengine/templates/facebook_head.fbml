@@ -3,4 +3,4 @@
 	CSS/scripts appearing on the every application page.
 
 {% endcomment %}
-<link rel="stylesheet" type="text/css" media="screen" href="{{ fb_media_url}}/main.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{{ fb_media_url}}/main.css?version={{ fb_media_url_suffix }}" />
