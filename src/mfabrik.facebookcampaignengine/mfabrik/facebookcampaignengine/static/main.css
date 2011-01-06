@@ -1,0 +1,198 @@
+/* 
+   more facebook styles from 
+   http://www.socialsnippets.com/snippets/how-to-style-an-application-like-facebook.aspx
+ */
+
+.fbinfobox   
+{   
+    background-color: #fff9d7;   
+    border: 1px solid #e2c822;   
+    color: #333333;   
+    padding: 10px;   
+    font-size: 13px;   
+    font-weight: bold;   
+}   
+
+.actions { background-color: #fff9d7; }
+
+.actions a.upload {
+	background:transparent url(upload.gif) no-repeat scroll left 2px;
+	padding:0 0 0 16px;
+}
+
+p.info { color: #FFAD1F; }
+div.info a { margin-top: 5px; }
+
+/* Facebook border for photos */
+#photoborder {
+	background:#F7F7F7 none repeat scroll 0 0;
+	border-bottom:1px solid #BBBBBB;
+	border-top:1px solid #BBBBBB;
+	margin:0 0 20px 0;
+	padding:0 0 10px;
+	text-align:center;
+	clear: both;
+}
+
+#photoborder img {
+	background:white none repeat scroll 0 0;
+	border:1px solid #DDDDDD;
+	margin:10px;
+}
+#photocaption {
+	line-height:15px;
+	margin:0;
+	padding:0 11px 1px 10px;
+	text-align:left;
+	width:530px;
+}
+
+#album_container { 
+	background:#F7F7F7 none repeat scroll 0 0;
+	border:1px solid #BBBBBB;
+	margin:0 0 15px;
+	padding:0;
+	clear: both;
+	overflow: hidden;
+}
+
+/* Wall-like subheading */
+.wall-like-title {
+	background-color:#CFD7E4;
+	border-top:1px solid #3B5998;
+	color:#3B5998;
+	font-size:11px;
+	font-weight:bold;
+	overflow:hidden;
+	padding:3px 5px 2px;
+	color:#3B5998;
+	font-size:11px;
+	font-weight:bold;
+}
+
+/* Action box floating on the right */
+.simple-box {
+	width: 150px;
+	float: right;
+	border:1px solid #D8DFEA;
+	color:#333333;
+	margin-bottom:20px;
+	padding:7px;
+	position:relative;
+	clear: both;
+}
+
+.action-list {
+	padding: 5px 10px;
+	list-style-type: none;
+}
+
+.pet-main-image {
+	margin: 1em;
+	margin-top: 0;
+}
+
+.float-right { float: right; }
+
+.pet-data h1 { font-size: 36px; }
+
+p.story { font-size: 14px; }
+
+.pet-listing li { text-align: center; }
+
+.pet-listing li .info p{ text-align:center; }
+
+.pet-listing .thumbnail-wrapper-outer { height: 200px; }
+.pet-listing .thumbnail-wrapper-inner { height: 110px; }
+.pet-listing .actions { font-size: 9px; }
+
+div.pet-status-note { margin-top: 10px; }
+.pet-story-container { clear:both; }
+.pet-story { background-color: #F7F7F7; border: 1px solid #CECECE; padding: 10px; }
+.pet-story-preview { font-size: 10px; height: 40px; }
+
+.pet-listing .thumbnail-wrapper-outer {
+	background:white none repeat scroll 0 0;
+	border:1px solid #CCCCCC;
+	margin:0 0 5px;
+	padding:9px;
+}
+
+/* Thumbnail listings */
+
+ul.thumbnail-feed {
+	list-style-type: none;
+}
+
+ul.thumbnail-feed li {
+	display: inline;
+	float: left;
+	margin: 10px;
+}
+
+ul.thumbnail-feed li img {
+	background:white none repeat scroll 0 0;
+	border:1px solid #CCCCCC;
+	padding:4px;
+}
+
+
+ul.thumbnail-feed li img:hover {
+	border: 1px solid #3B5998;
+}
+
+
+.thumbnail-wrapper-outer {
+	
+	width: 120px;
+	height: 120px;
+	vertical-align: middle;
+	
+	overflow: hidden;
+	position: relative;
+}
+
+.legend-box {
+    height: 30px; 
+    text-align: center; 
+    margin-bottom: 5px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.legend-text {
+    padding-top: 7px; 
+    padding-left: 10px; 
+    float: left;
+}
+
+.thumbnail-wrapper-outer[class] {display: table; position: static;}
+
+.thumbnail-wrapper-middle {position: absolute; top: 50%;} /* for explorer only*/
+
+.thumbnail-wrapper-middle[class] {
+	display: table-cell; 
+	vertical-align: middle; 
+	position: static;
+}
+
+/* for explorer only */
+.thumbnail-wrapper-inner {
+	text-align: center;
+	position: relative; 
+	top: -50%
+}
+
+*:first-child+html .thumbnail-wrapper-outer[class] {
+    position:relative
+} /* for explorer 7 only */
+
+*:first-child+html .thumbnail-wrapper-middle[class] {
+    position: absolute;
+    display:block;
+    vertical-align:inherit;
+    top: 50%;
+} /* for explorer 7 only */
+
+
+

@@ -1,0 +1,10 @@
+<fb:fbml version="1.1"> 
+
+    {% include "facebook_head.fbml" %}	
+
+    <fb:if-is-app-user>
+	    You are user of this application
+    </fb:if-is-app-user>
+					
+</fb:fbml>
+

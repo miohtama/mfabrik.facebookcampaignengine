@@ -1,0 +1,149 @@
+/**
+ * Facebook form styles.
+ * 
+ * Stylize forms like in Facebook.
+ * 
+ * We can have <table> or <p> based forms in Django, thus table.fb-form declarations.
+ * 
+ * Copyright 2008-2010 mFabrik Research Oy
+ * 
+ * Author: Mikko Ohtamaa <mikko@mfabrik.com>
+ * 
+ * http://twitter.com/moo9000
+ * 
+ */
+
+/* IE6 compatible centering */
+.fb-form  {
+	text-align: center;
+}
+
+.fb-form .form-body {
+	text-align: center;
+}
+
+.fb-form table.fields {
+	background:#F7F7F7 none repeat scroll 0 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	padding: 10px 20px;
+}
+
+.fb-form table.fields td, th {
+	vertical-align: top;
+}
+
+/* Don't allow too long descriptions to grow field width space */
+.fb-form table.fields td {
+	width:  400px;
+}
+
+/* Little adjust to make label match with <input> baseline */
+.fb-form table.fields th {
+	padding-top: 4px;
+}
+
+/* Edit and cancel buttons */
+.fb-form table.fields .buttons { margin-top:20px; text-align: center; }
+
+.fb-form table.fields input { border: 1px solid #BDC7D8; }
+
+/* Apply this style for as_p() forms */
+div.fb-form input {
+	margin-top: 0.5em;
+	border: 1px solid #BDC7D8;
+}
+
+.fb-form .help-text {
+	font-size: 90%;
+	color: #555555;
+	display: block;
+	margin-top: -1em;
+	margin-bottom: 1em;
+}
+
+/*
+	Highlight errornous fields with red background	
+ */
+.fb-form .has-errors {
+	background: #FFaaAA;
+}
+
+.fb-form .error { 
+	font-weight: bold;	
+}
+
+/* Button list at the bottom of form */
+.fb-form buttons {
+	text-align: center;
+	width: 100%;
+}
+
+
+/* Facebook looking button */
+.fb-form button,
+.fb-form input[type=submit], input.fbook {
+	background-color:#3B5998;
+	border-color:#D9DFEA #0E1F5B #0E1F5B #D9DFEA;
+	border-style:solid;
+	border-width:1px;
+	color:#FFFFFF;
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size:11px;
+	padding:2px 15px 3px;
+	text-align:center;
+	cursor: pointer;	
+}
+
+
+/* Link in the form buttons section */
+.fb-form a.buttonic,
+.fb-form a.buttonic:visited,
+.fb-form a.buttonic:hover,
+.fb-form a.buttonic:active {
+	cursor: pointer;
+}
+
+.error, .errorlist {
+	background: #FFaaAA;
+	padding: 4px;
+    color: black;
+    border: 1px solid red;
+    font-weight: bold;
+}
+
+ul.errorlist {
+	list-style-type: none;
+}
+
+.fb-form .description {
+	color: grey;
+	font-size: 80%;
+	padding-bottom: 0em;	
+}
+
+span.error {
+	background: #ffaaaa;
+	color: black;
+	padding: 5px;
+	border: 1px solid #f00;
+	width: 100%;
+	margin-bottom: 5px;
+	display: block;
+}
+
+
+p.step {
+	margin: 1em;
+	padding: 1em;
+	background: #3B5998;
+	color: white;
+}
+
+/* Hide list bullets at the front of radio button */
+table.fields td ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0.5em;
+}

@@ -1,0 +1,56 @@
+.suggest_placeholder {
+	color: #777;
+}
+
+.suggest_found {
+	background: #e1e9f6;
+}
+
+.suggest_pretext {
+	color: #aaa;
+}
+
+.suggest_list {
+	background: transparent;
+	border: 1px solid #bdc7d8;
+	border-top: none;
+	font-size: 11px;
+	margin-top: -1px;
+	overflow: hidden;
+	position: absolute;
+	text-align: left;
+	z-index: 102;
+}
+
+.suggest_list .suggest_suggestion {
+	background: #fff;
+	border-top: 1px solid #ddd;
+	color: #000;
+	cursor: pointer;
+	padding: 3px;
+	opacity: 0.94;
+	width: 100%;
+}
+
+.suggest_list .suggest_suggestion em {
+	background: #d8dfea;
+	color: black;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.suggest_list .suggest_suggestion small {
+	color: #808080;
+	padding-left: 5px;
+}
+
+.suggest_list .suggest_selected {
+	background: #3b5998;
+	color: #fff;
+	opacity: 1;
+}
+
+.suggest_list .suggest_selected em {
+	background: #5670a6;
+	color: #fff;
+}
