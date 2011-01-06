@@ -60,16 +60,33 @@ Make sure dev server is on. Test your SSH tunnel by pointing your browser to URL
     
 Here is an example how to set Facebook app settings for testing::
 
-* Canvas Page: http://apps.facebook.com/mikkotestcampaign (You can access your FB app in this address)
+* Canvas Page: http://apps.facebook.com/mikkotestcampaign You can access your FB app in this address)
 
-* Canvas URL: http://yourserver:3334/facebook/canvas/ (this is a HTTP address SSH tunneled to your local computer - mapped to Django view canvas())
+* Canvas URL: http://mansikki.twinapex.fi:3334/facebook/ 
 
 * Canvas type: FBML
+
+
+Canvas URL is a HTTP address for server-to-server traffic. Facebook connects this URL, reads FBML pages, converts them to HTML
+and servers the user. Publicly canvas URL can be reached from Canvas page address. 
+In our Django application, we simply map all these urls to /facebook/ URI space.
+
+E.g.
+
+    apps.facebook.com/yourapp/ping
+    
+Becomes internally
+
+    http://localhost:8000/facebook/ping
+
+For development, it is a best practice to SSH tunnel Canvas URL to your local computer.
 
 .. note ::
 
     The benefit of using SSH tunnel over your dynamic public IP is that you don't need to fiddle with Facebook 
     app settings every time your dynamic IP changes.
+
+
 
 Deploy
 ======
@@ -96,6 +113,24 @@ Facebook app needs
 * Privacy Policy URL
 
 * Terms of Service URL
+
+Notes
+=====
+
+Workflow
+--------
+
+* If the user is accessing the web site directly, and not through public apps.facebook.com URL, the user is directed to the public URL
+
+* If the user has not logged into Facebook, Facebook will prompt for it
+
+* Facebook gives "Add application dialog"
+
+* Extented permissions are prompted for the application
+
+* Questionnaire page is shown
+
+* 
 
 Author
 ======

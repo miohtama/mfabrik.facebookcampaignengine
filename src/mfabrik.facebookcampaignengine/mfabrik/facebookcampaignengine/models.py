@@ -14,6 +14,7 @@ class User(models.Model):
     
     class Meta:        
         unique_together = (('network','network_id'),)
+        app_label = 'facebookcampaignengine'
     
     NETWORK_FACEBOOK=0
     

@@ -27,11 +27,37 @@ from django.conf import settings
 from facebook.djangofb import Facebook
 from facebook import FacebookError
 
+import fbook
+from models import User
 
 # Python logging package logger object for our server
 
 logger = logging.getLogger("Campaign Engine")
 
+def get_or_create_user(request):
+    """ Create a persistent user entry of this Facebook user to our database """
+    
+    # Check if we have cached FB user available
+    user = getattr(request, "facebook_user", None)
+    if user:
+        return user
+    
+    facebook = request.facebook
+    uid = facebook.uid
+    
+    # User account is already binded with the Facebook account
+    try:
+        entry = fbook.get_user(uid)
+        return entry
+    except User.DoesNotExist:
+        pass
+    
+    # Lazily create the user object
+    uid = facebook.users.getLoggedInUser()
+    logger.info("Adding application for uid:" + str(uid))    
+    request.pets_user = User.objects.create(network=User.NETWORK_FACEBOOK, network_id=uid)
+    
+    return user
 
 def need_user():
     """ Function decorator to require Facebook session and logged in user for the request handler. """
@@ -41,7 +67,7 @@ def need_user():
             """ Make sure that the user is logged in to Facebook and we have a persistent User object.
             """
             if getattr(request, 'facebook', None) is None:
-                fbook.add_instance(request)
+                fbook.cache_facebook_instance(request)
             
             fb = request.facebook
             if not fb.check_session(request):
@@ -67,7 +93,7 @@ def need_user_outband_form_post():
             """
             
             if getattr(request, 'facebook', None) is None:
-                fbook.add_instance(request)
+                fbook.cache_facebook_instance(request)
                 
             fb = request.facebook
             if not fb.check_session(request):
@@ -102,17 +128,14 @@ def get_context_parameters(request):
 
 @need_user()  
 def canvas(request):
-    """ Canvas is the page which is rendered when the user clicks your application in Facebook.
-
-    This page is not the page displayed in the Facebook profile!
+    """ Canvas is the page which is rendered when the user clicks your application in Facebook
+    (enters apps.facebook.com URL)=
     
     We use the page to change the Facebook integration settings of the user and 
     display a preview of his/her profile block.    
     """
     
     logger.info("On Facebook canvas")
-    
-    
     
     request.facebook_user = get_or_create_user(request)
     

@@ -30,6 +30,7 @@ __docformat__ = 'epytext'
 __copyright__ = "Copyright 2008-2010 mFabrik Research Oy"
 
 import time
+import logging
 
 # Django imports
 from django import template
@@ -58,8 +59,10 @@ def get_user(id):
     """ Return Facebook user object. """
     return User.objects.get(network = User.NETWORK_FACEBOOK, network_id = id)
     
-def add_instance(request):
+def cache_facebook_instance(request):
     """ Adds request.facebook object. 
+    
+    @param request: HTTP request object acting as cache storage
     
     @return: Facebook object    
     """
@@ -83,6 +86,14 @@ def add_instance(request):
         )
     
     return request.facebook
+
+def get_permission_url():
+    """
+    http://www.facebook.com/connect/prompt_permissions.php?api_key=de33669a10a4219daecf0436ce829a2e&v=1.0&next=http://apps.facebook.com/myappname/granted/%3fxxRESULTTOKENxx&display=popup&ext_perm=read_stream,publish_stream,offline_access&enable_profile_selector=1
+    """
+    
+    
+    
 
 def add_instance_outband_form(request):
     """ Create Facebook object for forms not submitted to the application canvas.

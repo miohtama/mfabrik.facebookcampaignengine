@@ -57,7 +57,7 @@ except ImportError:
 
 # Facebook settings
 
-#: Facebook keys - you get them after registering your app from Facebook
+#: Facebook keys - you get them after registering your app in Facebook
 FACEBOOK_APPLICATION_ID="191057254241074"
 FACEBOOK_API_KEY = 'b2b9f2a0f7a00a6c76cd72a40da160e3'
 FACEBOOK_SECRET_KEY = '53e242933f872bfc568b6df31cf29fdc'
@@ -65,7 +65,7 @@ FACEBOOK_SECRET_KEY = '53e242933f872bfc568b6df31cf29fdc'
 FACEBOOK_SESSION_KEY = '7a88c3a4b7068cd34b195c59-1230271672'
 
 #: The following appears in URL http://apps.facebook.com/petbook/
-FACEBOOK_APP_NAME = "Petbook"
+FACEBOOK_APP_NAME = "mikkotestcampaign"
 
 # This URL is visible to the application users
 FACEBOOK_EXTERNAL_URL="http://apps.facebook.com/" + FACEBOOK_APP_NAME

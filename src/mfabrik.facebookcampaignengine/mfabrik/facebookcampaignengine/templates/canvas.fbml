@@ -2,9 +2,17 @@
 
     {% include "facebook_head.fbml" %}	
 
+    <fb:header>
+        <p>To use this application, additional permissions are needed.        
+        To do that, just 
+        <a href="http://www.facebook.com/connect/prompt_permissions.php?api_key=de33669a10a4219daecf0436ce829a2e&v=1.0&next=http://apps.facebook.com/myappname/granted/%3fxxRESULTTOKENxx&display=popup&ext_perm=read_stream,publish_stream,offline_access&enable_profile_selector=1">click here</a>.
+    </fb:header>                            
+
     <fb:if-is-app-user>
 	    You are user of this application
     </fb:if-is-app-user>
-					
+    
+    Hello there, folks!
+	
 </fb:fbml>
 
