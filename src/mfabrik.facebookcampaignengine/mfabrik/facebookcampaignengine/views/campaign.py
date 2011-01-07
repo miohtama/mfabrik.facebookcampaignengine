@@ -148,7 +148,16 @@ def canvas(request, *args, **kwargs):
     request.facebook_user = get_or_create_user(request)
     
     params = get_context_parameters(request)
-                   
+    
+    # Check whether required extened permissions are in place
+    # This is little bit expensive, as two remote calls ensures
+    # http://developers.facebook.com/docs/reference/rest/users.hasAppPermission
+    logger.debug("Got:" + str(request.facebook.users.hasAppPermission("email")))
+    params["has_required_permissions"] =  (request.facebook.users.hasAppPermission("email") == 1 and 
+                                           request.facebook.users.hasAppPermission("publish_stream") == 1)
+    
+    logger.debug("Rendering canvas:" + str(params))
+    
     return render_to_response('canvas.fbml', 
                               params,
                               context_instance=RequestContext(request)

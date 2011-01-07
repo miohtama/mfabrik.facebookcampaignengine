@@ -10,6 +10,9 @@ class User(models.Model):
     
     Store the data of a social network user accessing the site, 
     including tokens needed to do push requests to the social network.
+    
+    This model also serves as a key to our internally stored data e.g.
+    answers given by a user.
     """
     
     class Meta:        

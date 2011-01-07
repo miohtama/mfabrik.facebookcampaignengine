@@ -131,9 +131,9 @@ Workflow
 
 * If the user has not logged into Facebook, Facebook will prompt for it
 
-* Facebook gives "Add application dialog"
+* Facebook gives "Allow application to access permissions" - contains link to TOS and PP
 
-* Extented permissions are prompted for the application
+* Extented permissions are prompted for the application before it gives the user an option to proceed
 
 * Questionnaire page is shown
 
