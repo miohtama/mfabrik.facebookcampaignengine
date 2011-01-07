@@ -1,0 +1,38 @@
+<fb:fbml version="1.1"> 
+
+    {% include "facebook_head.fbml" %}	
+
+ 
+    <fb:header>
+        Lähetä toivotus
+    </fb:header>                            
+    
+    
+    <p>
+        Tarkista vielä toivotus, ennen kuin lähetät sen ystävällesi 
+    </p>
+    
+    <!--   -->       
+    <fb:request-form
+        action="{{ fb_external_url }}/greeting_post_action" 
+        method="POST" 
+        invite="false" 
+        type="Ystäväsi muistaa sinua" 
+        content="Hei,
+        
+        Mikko haluaa kertoa sinulle, että sinulla on paras peppu.
+              
+        {{ participate_link|escape }} 
+        
+        "> 
+
+        <fb:request-form-submit label="Lähetä toivotus ystävällesi %n" uid="611693032" />
+
+    </fb:request-form>
+    
+    <p>
+        <a href="#">Takaisin</a>
+    </p>
+    
+</fb:fbml>
+

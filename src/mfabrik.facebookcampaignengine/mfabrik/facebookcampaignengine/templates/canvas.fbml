@@ -3,34 +3,30 @@
     {% include "facebook_head.fbml" %}	
 
     <fb:header>
-        Facebook campaign engine sample application
+        Hotelli Testihotellin lomakilpa
     </fb:header>                            
     
     
-    <!-- http://developers.facebook.com/docs/reference/fbml/prompt-permission/ -->    
-    <fb:prompt-permission perms="email,publish_stream" nextfb_js="refresh()">
-        To use this application you need to allow receive email and publish news stories.
-    </fb:prompt-permission>
     
-    <fb:if-is-app-user>
-	    You are user of this application
+    <fb:if-is-app-user>	  
+            <p>
+	    Valitse ystävä, jota haluat muistaa iloisella toivotuksella ja osallistu
+	    matkaarvontaan kahdelle Hotelli Testihotellin hemmotteluviikonloppuun.
+            </p>
     </fb:if-is-app-user>
     
     
     {% if not has_required_permissions  %}
-        <p>
-                Looks like you are little short on the permissions currently.
-        </p>
+    
+            <p style="text-align: center">
+                    <!-- http://developers.facebook.com/docs/reference/fbml/prompt-permission/ -->    
+                    <fb:prompt-permission perms="email,publish_stream" nextfb_js="refresh()">
+                        Jatka eteenpäin.
+                    </fb:prompt-permission>
+            </p>
+            
     {% endif %}
-    
-    {% if has_required_permissions %}
-        <p>
-                Good to go.
-        </p>
-    {% endif %}
-    
-    Hello there, folks!
-    
+ 
     
     <script>
         /* 

@@ -106,6 +106,25 @@ Registering with Facebook
 Create a test Facebook account. Register yourself to Facebook *Developer* application (just type Developer in Facebook search box).
 The Facebook account must be verified with a credit card or a mobile phone number.
 
+Adding the app as fan page tab
+---------------------------------
+
+* Go to Developer app, your application settings
+
+* Enable tab feature in Application settings
+
+* Go to the application profile page - link on the settings
+
+* Click "Add to my pages" on left 
+
+* Choose page where you want to add the application
+
+Notes
+
+* Tabs do not need authenticated user
+
+* If you want to access user information, you must have anonymous tab page which contains link to your application
+
 Facebook assets
 ---------------
 

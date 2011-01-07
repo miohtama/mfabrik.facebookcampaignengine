@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 
     Facebook campaign engine related HTTP views in Facebook.
@@ -29,6 +30,8 @@ from facebook import FacebookError
 
 import fbook
 from models import User
+
+import json
 
 # Python logging package logger object for our server
 
@@ -163,6 +166,107 @@ def canvas(request, *args, **kwargs):
                               context_instance=RequestContext(request)
                               )
 
+
+@need_user()  
+def send_love_letter(request, *args, **kwargs):
+    """ Send a message to another user.
+    
+    """
+    
+    logger.info("On Facebook")
+    
+    request.facebook_user = get_or_create_user(request)
+    
+    params = get_context_parameters(request)
+    
+    params["parcipate_link"] = '<fb:req-choice url="%s" label="Lähetä toivotus ja osallsitu lomakilpaan" />' % settings.FACEBOOK_EXTERNAL_URL
+    
+    logger.debug("Rendering FBML:" + str(params))
+    
+    return render_to_response('send_love_letter.fbml', 
+                              params,
+                              context_instance=RequestContext(request)
+                              )
+
+@need_user()  
+def competition(request, *args, **kwargs):
+    """ Send a message to another user.
+    
+    """
+    
+    logger.info("On competition page")
+    
+    #request.facebook_user = get_or_create_user(request)
+    
+    params = {}
+    
+    if request.method == "POST":
+        
+        # Check if user marked checkbox to publish the greeting in his/her stream
+        
+        links = [
+            
+            {
+                     "text" : " Ystäväkilpa",
+                     "href" : "#"
+            },
+            
+            {
+                     "text" : " Hotelli Testihotelli",
+                     "href" : "#"
+            },
+        ]
+        
+        # http://developers.facebook.com/docs/reference/rest/stream.publish/
+        request.facebook.stream.publish(message="Mielestäni kauneimmat silmät ovat ystävälläni Mikko", 
+                                        action_links = json.dumps(links)
+                                        )
+        
+    logger.debug("Rendering FBML:" + str(params))
+    
+    return render_to_response('competition.fbml', 
+                              params,
+                              context_instance=RequestContext(request)
+                              )
+
+def page_tab(request, *args, **kwargs):
+    """ Send a message to another user.
+    
+    """
+    
+    logger.info("On Facebook Pages tab")
+    
+    #request.facebook_user = get_or_create_user(request)
+    
+    params = {}
+    
+    logger.debug("Rendering FBML:" + str(params))
+    
+    return render_to_response('page-tab.fbml', 
+                              params,
+                              context_instance=RequestContext(request)
+                              )
+    
+
+@need_user()  
+def select_friend(request, *args, **kwargs):
+    """ Select a honeybunny friend.
+    
+    """
+    
+    logger.info("On Facebook")
+    
+    request.facebook_user = get_or_create_user(request)
+    
+    params = get_context_parameters(request)
+    
+    logger.debug("Rendering FBML:" + str(params))
+    
+    return render_to_response('select_friend.fbml', 
+                              params,
+                              context_instance=RequestContext(request)
+                              )
+  
   
 @need_user()
 def publish_facebook_story(request, one_line_story_templates, template_data):

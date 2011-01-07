@@ -1,0 +1,41 @@
+<fb:fbml version="1.1"> 
+
+    {% include "facebook_head.fbml" %}	
+
+    <fb:header>
+       Valitse ystävä tai ystäväsi, joita haluat muistaa
+    </fb:header>                            
+   
+   <!-- http://developers.facebook.com/docs/reference/fbml/friend-selector/ -->
+   <form method="post" action="question" include_me="false">
+   
+        <b>Kirjoita ystäväsi nimi*:</b> <fb:friend-selector name="uid" idname="grab_me_please" />
+   
+        <p>Valitse toivotus</p>
+
+        <p>
+                <input type="radio">kauneimmat silmät
+        </p>
+
+        <p>
+                <input type="radio">paras peppu
+        </p>
+        
+        <p>
+                <input type="radio">lämpimin sydän
+        </p>
+        
+        <p>
+                <input type="checkbox" checked="checked">Julkaise toivotus Facebook-profiilissani
+        </p>
+        
+        <input type="submit" value="Eteenpäin">
+               
+   </form>
+    
+   <p>
+        *) Ystäväsi tulee olla Facebookin jäsen
+   </p>
+   
+</fb:fbml>
+

@@ -1,0 +1,42 @@
+<fb:fbml version="1.1"> 
+
+    {% include "facebook_head.fbml" %}	
+
+ 
+    <fb:header>
+        Kilpailutiedot
+    </fb:header>        
+    
+    <fb:success>
+        <fb:message>Toivotus lähetetty</fb:message>
+        Toivotus lähetettiin ystävällesi Mikko Ohtamaa.
+    </fb:success>                    
+    
+    <form action="." method="POST">
+    
+            <!-- Prefill information from Facebook if the user allows the information -->
+            <p>
+                <input type="checkbox" checked="checked">Haluan osallistua Hotelli Testihotellin lomakilpaan 
+            </p>
+            
+            <p>
+                <label>Nimi</label><input type="text" />
+            </p>
+        
+            <p>
+                <label>Osoite</label><input type="text" />
+        
+            </p>
+            
+            <p>
+                <label>Puhelinnumero</label><input type="text" />
+            </p>
+            
+        
+            <input type="submit" value="Osallistu">
+    
+    </form>
+    
+    
+</fb:fbml>
+

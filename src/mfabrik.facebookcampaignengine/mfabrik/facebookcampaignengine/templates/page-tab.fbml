@@ -1,0 +1,28 @@
+<fb:fbml version="1.1"> 
+
+    {% include "facebook_head.fbml" %}	
+
+    <fb:header>
+        Hotelli Testihotellin lomakilpa
+    </fb:header>                            
+    
+    <p>
+        Muista ystävääsi ja voita hänen kanssaan matka Hotelli Testihotellin.
+    </p>
+    
+    <p>
+   
+        <!-- Note that this URL must to external site or Facebook
+             tries to use local AJAXy page fetcher and misareble fails -->
+             
+        <a href="mansikki.twinapex.fi:3334/facebook/">Siirry kilpailuun</a>
+    </p>
+    
+    <p>
+        <a href="#">Kilpailun säännöt</a> | 
+        <a href="#">Yksityisyyden suoja</a>
+    </p>
+    
+    
+</fb:fbml>
+

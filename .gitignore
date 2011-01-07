@@ -33,7 +33,7 @@ dist
 __minitage__*
 .metadata
 .secret.cfg
-
+.settings
 .project
 .pydevproject
 flattened-eggs
