@@ -30,4 +30,4 @@ class User(models.Model):
     #: Active Facebook session id which we can use to update the user's profile  - needed only for outside browser sessions
     session_key = models.CharField(max_length=256, null=True)
         
-admin.site.register(User)
+#admin.site.register(User)

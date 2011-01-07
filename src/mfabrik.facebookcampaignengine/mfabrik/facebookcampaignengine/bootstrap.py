@@ -39,6 +39,8 @@ def main():
     logger.info("Starting with PYTHONPATH:" + str(sys.path))
 
     #enable_pdb()
+    
+    logging.getLogger().setLevel(logging.DEBUG)
         
     from djangoappengine.main.main import main as djangoappengine_main
     djangoappengine_main()
