@@ -60,7 +60,11 @@ def get_or_create_user(request):
     return user
 
 def need_user():
-    """ Function decorator to require Facebook session and logged in user for the request handler. """
+    """ Function decorator to require Facebook session and logged in user for the request handler. 
+    
+    Facebook apps can contain pages for anonymous and logged in users.
+    This decorator forces the pages we serve to be for logged in users only.
+    """
 
     def decorator(view):
         def need_user(request, *args, **kwargs):
@@ -70,11 +74,15 @@ def need_user():
                 fbook.cache_facebook_instance(request)
             
             fb = request.facebook
+            
+            # Checking if the user has logged into faecbook
             if not fb.check_session(request):
+                logger.info("User was not logged into facebook")
                 return fb.redirect(fb.get_login_url(next=fb.get_app_url()))
             
             # Store the current internal user object in the request,
             # so it is easily accessible everywhere
+            logger.debug("Creating local user object")
             request.facebook_user = get_or_create_user(request)
             
             return view(request, *args, **kwargs)
@@ -111,23 +119,23 @@ def need_user_outband_form_post():
 
 
 def get_context_parameters(request):
-      
+    """
+    Our helper function for filling in template vars.
+    """  
     params = {}     
     
     if hasattr(request, "pets_user"):
         params.update({
-            "user" : request.pets_user,
-            "own_pets" : resolve_pets(request, request.pets_user.pets.all()),
-            # Add wizard status variable
-            "wizard_step" : request.GET.get("step", None)
+            "user" : request.facebook_user,
         })
     
+
     params.update(fbook.get_context_parameters())
-    #logger.debug("Params:" + str(params))
+    
     return params
 
 @need_user()  
-def canvas(request):
+def canvas(request, *args, **kwargs):
     """ Canvas is the page which is rendered when the user clicks your application in Facebook
     (enters apps.facebook.com URL)=
     
@@ -135,7 +143,7 @@ def canvas(request):
     display a preview of his/her profile block.    
     """
     
-    logger.info("On Facebook canvas")
+    logger.info("On Facebook canvas " + str(args) + " " + str(kwargs))
     
     request.facebook_user = get_or_create_user(request)
     

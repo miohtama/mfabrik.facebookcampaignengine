@@ -31,6 +31,7 @@ __copyright__ = "Copyright 2008-2010 mFabrik Research Oy"
 
 import time
 import logging
+import os
 
 # Django imports
 from django import template
@@ -51,8 +52,12 @@ from django.conf import settings
 from facebook.djangofb import Facebook
 from facebook import FacebookError
 
+from mfabrik.facebookcampaignengine.models import User
+
 # Python logging package logger object for our server
 logger = logging.getLogger("Facebook helpers")
+
+
 
 
 def get_user(id):
@@ -70,13 +75,14 @@ def cache_facebook_instance(request):
     # if request already has a facebook instance attached, immediately return
     if getattr(request, 'facebook', None) is not None:
         return request
-    
+        
     # auth_token is other important possible param
     api_key = settings.FACEBOOK_API_KEY
     secret_key = settings.FACEBOOK_SECRET_KEY
     app_name = getattr(settings, 'FACEBOOK_APP_NAME', None)
     callback_path = getattr(settings, 'FACEBOOK_CALLBACK_PATH', None)
     internal = getattr(settings, 'FACEBOOK_INTERNAL', True)
+    
     request.facebook = Facebook(
         api_key=api_key,
         secret_key=secret_key,
@@ -310,7 +316,7 @@ def generate_latest_static_media_timestamp():
         if t > latest_time:
             latest_time = t
             
-    return t 
+    return latest_time
 
 _latest_media_timestamp = None
 
@@ -322,6 +328,7 @@ def get_static_media_suffix():
     We do this by suffixing all media URLs with a HTTP GET query parameter.
     there.
     """
+    global _latest_media_timestamp
     
     # Look up for the timestamp only on the server start
     if not _latest_media_timestamp:
@@ -347,4 +354,42 @@ def get_context_parameters():
 def redirect(url):
     """ Facebook canvas compatible redirect. """
     return HttpResponse('<fb:redirect url="%s" />' % (url, ))
+
+
+class FacebookView(object):
+    """
+    Base class for Facebook canvas views.
+    """
+    
+    
+    def prepare_template_params(self):
+        params = dict(current_user=self.current_user,
+                    facebook_app_id=settings.FACEBOOK_APP_ID)
+    
+    @property
+    def current_user(self):
+        
+        if not hasattr(self, "_current_user"):
+            self._current_user = None
+            cookie = facebook.get_user_from_cookie(
+                self.request.cookies, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
+            if cookie:
+                # Store a local instance of the user data so we don't need
+                # a round-trip to Facebook on every request
+                user = User.get_by_key_name(cookie["uid"])
+                if not user:
+                    graph = facebook.GraphAPI(cookie["access_token"])
+                    profile = graph.get_object("me")
+                    user = User(key_name=str(profile["id"]),
+                                id=str(profile["id"]),
+                                name=profile["name"],
+                                profile_url=profile["link"],
+                                access_token=cookie["access_token"])
+                    user.put()
+                elif user.access_token != cookie["access_token"]:
+                    user.access_token = cookie["access_token"]
+                    user.put()
+                self._current_user = user
+        return self._current_user
+
     

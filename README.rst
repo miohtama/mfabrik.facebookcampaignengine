@@ -66,6 +66,8 @@ Here is an example how to set Facebook app settings for testing::
 
 * Canvas type: FBML
 
+* OAuth 2.0 for Canvas: Disabled (Pyfacebook does not support this... this is signed_request payload in HTTP POST request)
+
 
 Canvas URL is a HTTP address for server-to-server traffic. Facebook connects this URL, reads FBML pages, converts them to HTML
 and servers the user. Publicly canvas URL can be reached from Canvas page address. 
@@ -86,7 +88,12 @@ For development, it is a best practice to SSH tunnel Canvas URL to your local co
     The benefit of using SSH tunnel over your dynamic public IP is that you don't need to fiddle with Facebook 
     app settings every time your dynamic IP changes.
 
+Errors
+++++++
 
+Facebook canvas will serve a blank page in the case App Engine gives you an error response
+You need to catch errors from the dev_server terminal output. This will be also the case if your
+SSH tunnel stops responding.
 
 Deploy
 ======
